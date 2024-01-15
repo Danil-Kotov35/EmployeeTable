@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>{% block title %}Учет сотрудников{% endblock %}</title>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+        <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>">
+
+        {% block stylesheets %}{% endblock %}
+            <style>
+
+                .dropbtn {
+                    background-color: #f8f9fa;
+                    color: #000000;
+                    padding: 16px;
+                    font-size: 16px;
+                    border: none;
+                    cursor: pointer;
+                    margin-right: 60px;
+                    transition: 0.2s linear;
+                    font-size: 20px;
+                }
+
+                /* Контейнер <div> - необходим для размещения выпадающего содержимого */
+                .dropdown {
+                    position: relative;
+                    display: inline-block;
+
+                }
+
+                /* Выпадающее содержимое (скрыто по умолчанию) */
+                .dropdown-content {
+                    display: none;
+                    position: absolute;
+                    background-color: #f1f1f1;
+                    min-width: 160px;
+                    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+                    z-index: 1;
+                }
+
+                /* Ссылки внутри выпадающего списка */
+                .dropdown-content a {
+                    color: black;
+                    padding: 12px 16px;
+                    text-decoration: none;
+                    display: block;
+                }
+
+                /* Изменение цвета выпадающих ссылок при наведении курсора */
+                .dropdown-content a:hover {background-color: #C1C1C1;}
+
+                /* Показать выпадающее меню при наведении курсора */
+                .dropdown:hover .dropdown-content {display: block;}
+
+                /* Изменение цвета фона кнопки раскрывающегося списка при отображении содержимого раскрывающегося списка */
+                .dropdown:hover .dropbtn {background-color: #C1C1C1;}
+            </style>
+
+    </head>
+    <body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="collapse navbar-collapse" id="navbarNavDropdown">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ path('homePage') }}">Главная страница </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ path('employeeTable') }}">Таблица сотрудников</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ path('setEmployee') }}">Добавление сотрудника</a>
+                </li>
+            </ul>
+        </div>
+        <div class="dropdown">
+            <button class="dropbtn">{{ app.user.name }}</button>
+            <div class="dropdown-content">
+                <a href="{{ path('app_logout') }}">выйти из аккаунта</a>
+            </div>
+        </div>
+    </nav>
+        {% block body %}{% endblock %}
+        {% block javascripts %}{% endblock %}
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+    </body>
+
+
+</html>

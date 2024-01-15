@@ -1,0 +1,34 @@
+controllers:
+    resource:
+        path: ../src/Controller/
+        namespace: App\Controller
+    type: attribute
+
+
+
+
+employeeTable:
+    path: /getEmployees
+    controller: App\Controller\EmployeeTableController::employeeTable
+
+
+setEmployee:
+    path: /TableDisplay
+    controller: App\Controller\ListActionController::newEmployeesAction
+
+updateAction:
+    path: /updatelist/{id}
+    controller: App\Controller\ListActionController::UpdateList
+
+deleteAction:
+    path: /deletelist/{id}
+    controller: App\Controller\ListActionController::deleteList
+
+
+redirectHomePage:
+    path: /
+    controller: App\Controller\HomeController::redirectHome
+
+homePage:
+    path: /home
+    controller: App\Controller\HomeController::home

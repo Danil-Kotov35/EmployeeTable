@@ -1,0 +1,79 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+таблица сотрудников
+{% endblock %}
+
+{% block stylesheets %}
+    <style>
+        .table { border-collapse: collapse; }
+        .table th, td {
+            border-bottom: 1px solid #ddd;
+            width: 250px;
+            text-align: left;
+            align: left;
+        }
+        th{
+            cursor: pointer;
+            user-select:none;
+        }
+
+    </style>
+{% endblock %}
+{% block body %}
+    <h2>Наши сотрудники</h2>
+    <table id="table" class = "table">
+        <thead>
+            <tr>
+                <th data-type = 'string'>Имя</th>
+                <th data-type = 'string'>Должность</th>
+                <th data-type = 'number'>Зарплата</th>
+                <th></th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for x in data %}
+                <tr>
+                    <td>{{ x.Name }}</td>
+                    <td>{{ x.JobTitle }}</td>
+                    <td>{{ x.Salary }}</td>
+                    <td><a href = "{{ path('updateAction', { 'id' : x.Id }) }}">Изменить</a></td>
+                    <td><a href = "{{ path('deleteAction', { 'id' : x.Id }) }}">Удалить</a></td>
+                </tr>
+
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}
+{% block javascripts %}
+
+    <script>
+        table.onclick = function (e){
+            if (e.target.tagName != 'TH') return
+            let th = e.target
+            sortTable(th.cellIndex,th.dataset.type)
+        }
+
+        function sortTable(colNum,type){
+            let tbody = table.querySelector('tbody')
+            let rowsArray = Array.from(tbody.rows)
+            let compare;
+            switch (type){
+                case 'number':
+                    compare = function (rowA,rowB){
+                        return rowA.cells[colNum].innerHTML - rowB.cells[colNum].innerHTML
+                    }
+                    break;
+                case 'string':
+                    compare = function (rowA,rowB){
+                        return rowA.cells[colNum].innerHTML > rowB.cells[colNum].innerHTML ? 1 : -1;
+                    }
+                    break;
+            }
+            rowsArray.sort(compare);
+            tbody.append(...rowsArray);
+        }
+    </script>
+{% endblock %}
+
